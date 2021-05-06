@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Guess the button</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <h1>GUESS THE BUTTON</h1>
+    <p id="print"></p>
+    <div class="form">
+      <label>Please enter the number of buttons: </label>
+      <input type="text" class="buttonsNumber">
+      <input type="submit" value="Submit" onclick="generateButtons(document.querySelector('.buttonsNumber').value)">
+    </div>
+      <script>
+        function generateButtons(nr) {
+          let buttons = document.getElementsByTagName("body")[0];
+          for (let i = 1; i <= nr; i++) {
+            let button = document.createElement("button");
+            button.innerHTML = 'Button ' + i;
+            buttons.appendChild(button);
+            button.onclick = function() {
+              pressButton(i);
+            };
+          }
+        }
+        function pressButton(currentButton) {  
+          let enteredNumber = document.querySelector('.buttonsNumber').value;
+          let randomButtonNr = Math.ceil(Math.random() * enteredNumber);
+          if (randomButtonNr == currentButton) {
+            document.getElementById("print").innerHTML = "Congratulations! You got it right";
+          }
+          else {
+            document.getElementById("print").innerHTML = "Wrong button";
+          }
+        }
+      </script>
+    </body>
+</html>
